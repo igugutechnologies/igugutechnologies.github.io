@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Igugu Technologies — Websites for Business & Romance</title>
+<link rel="icon" type="image/png" href="instagram-profile.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════
+   RESET & ROOT
+══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* Professional */
+  --pro-deep:   #060C1F;
+  --pro-navy:   #0D1F4A;
+  --pro-blue:   #1B4FD8;
+  --pro-light:  #4D8EFF;
+  --pro-glow:   #3ECFFF;
+  /* Romantic */
+  --rom-deep:   #1A0512;
+  --rom-rose:   #8B1A4A;
+  --rom-blush:  #E8607A;
+  --rom-gold:   #F5C84A;
+  --rom-glow:   #FF87A8;
+  /* Neutral */
+  --cream:      #FBF7F0;
+  --white:      #FFFFFF;
+  --ink:        #0A0B0F;
+  --mid:        #666880;
+  /* Radii */
+  --r-sm: 8px; --r-md: 16px; --r-lg: 28px; --r-xl: 48px;
+  /* Easing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--ink);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+
+
+/* ══════════════════════════════════════════
+   CANVAS BACKGROUND
+══════════════════════════════════════════ */
+#hero-canvas {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.5s, backdrop-filter 0.5s, padding 0.3s;
+}
+nav.scrolled {
+  background: rgba(6,12,31,0.85);
+  backdrop-filter: blur(20px);
+  padding: 14px 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 600; letter-spacing: 0.02em;
+  text-decoration: none; color: var(--white);
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--pro-light), var(--rom-blush));
+  border-radius: 8px;
+  display: grid; place-items: center;
+  font-size: 0.9rem;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  font-size: 0.85rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: linear-gradient(135deg, var(--pro-blue), var(--rom-blush));
+  color: #fff !important; padding: 10px 24px; border-radius: 100px;
+  font-weight: 500 !important;
+  transition: transform 0.2s var(--ease-spring), box-shadow 0.3s !important;
+}
+.nav-cta:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 32px rgba(77,142,255,0.4) !important;
+  color: #fff !important;
+}
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: #fff; border-radius: 2px; transition: 0.3s;
+}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 120px 48px 80px;
+  overflow: hidden;
+}
+.hero-split {
+  position: absolute; inset: 0;
+  display: grid; grid-template-columns: 1fr 1fr;
+  opacity: 0.06;
+}
+.hero-split-pro {
+  background: linear-gradient(135deg, var(--pro-navy) 0%, transparent 100%);
+}
+.hero-split-rom {
+  background: linear-gradient(225deg, var(--rom-rose) 0%, transparent 100%);
+}
+.hero-divider {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.15) 70%, transparent);
+  transform: translateX(-50%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; max-width: 900px;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 8px 20px; border-radius: 100px;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s 0.2s var(--ease-out) forwards;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--pro-light), var(--rom-blush));
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 8vw, 7rem);
+  font-weight: 300; line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.9s 0.35s var(--ease-out) forwards;
+}
+.hero-title em {
+  font-style: italic; font-weight: 300;
+  background: linear-gradient(90deg, var(--pro-glow) 0%, var(--rom-glow) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-title-line2 {
+  display: block; font-size: clamp(2rem, 5vw, 4.2rem);
+  font-weight: 600;
+}
+.hero-subtitle {
+  font-size: 1.05rem; font-weight: 300;
+  color: rgba(255,255,255,0.6);
+  max-width: 560px; margin: 0 auto 48px; line-height: 1.7;
+  opacity: 0; animation: fadeUp 0.9s 0.5s var(--ease-out) forwards;
+}
+.hero-buttons {
+  display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.9s 0.65s var(--ease-out) forwards;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--pro-blue) 0%, var(--rom-blush) 100%);
+  color: #fff; text-decoration: none;
+  padding: 16px 36px; border-radius: 100px;
+  font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em;
+  border: none; cursor: pointer;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.3s;
+  position: relative; overflow: hidden;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--rom-blush), var(--pro-blue));
+  opacity: 0; transition: opacity 0.4s;
+}
+.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 48px rgba(77,142,255,0.35); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  padding: 16px 36px; border-radius: 100px;
+  font-size: 0.9rem; font-weight: 400;
+  border: 1px solid rgba(255,255,255,0.2); cursor: none;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.5); color: #fff;
+  background: rgba(255,255,255,0.06);
+}
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeIn 1s 1.2s forwards;
+}
+.hero-scroll-line {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scrollLine 1.5s infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+.hero-scroll-text {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ══════════════════════════════════════════
+   STATS BAR
+══════════════════════════════════════════ */
+#stats {
+  position: relative; z-index: 2;
+  padding: 40px 48px;
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.stats-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.stat-item {
+  text-align: center; padding: 20px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.stat-item.visible { opacity: 1; transform: none; }
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem; font-weight: 300; line-height: 1;
+  background: linear-gradient(90deg, var(--pro-light), var(--rom-blush));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ══════════════════════════════════════════
+   SECTION COMMON
+══════════════════════════════════════════ */
+.section-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+.section-label::before {
+  content: ''; display: block; width: 24px; height: 1px;
+  background: currentColor;
+}
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300; line-height: 1.1;
+  margin-bottom: 20px;
+}
+.section-heading em { font-style: italic; }
+
+/* ══════════════════════════════════════════
+   SERVICES SECTION
+══════════════════════════════════════════ */
+#services {
+  position: relative; z-index: 2;
+  padding: 120px 48px;
+  max-width: 1200px; margin: 0 auto;
+}
+.services-header {
+  text-align: center; margin-bottom: 80px;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.services-header.visible { opacity: 1; transform: none; }
+.services-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  border-radius: var(--r-lg); overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.service-panel {
+  padding: 64px 48px;
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.service-panel.visible { opacity: 1; transform: none; }
+.service-panel--pro {
+  background: linear-gradient(145deg, rgba(13,31,74,0.9) 0%, rgba(6,12,31,0.8) 100%);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transition-delay: 0.1s !important;
+}
+.service-panel--rom {
+  background: linear-gradient(145deg, rgba(26,5,18,0.9) 0%, rgba(6,12,31,0.8) 100%);
+  transition-delay: 0.25s !important;
+}
+.service-panel::before {
+  content: ''; position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12;
+  top: -100px; right: -100px;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+.service-panel--pro::before { background: var(--pro-blue); }
+.service-panel--rom::before { background: var(--rom-rose); }
+.service-panel:hover::before { opacity: 0.22; }
+.service-panel-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 100px;
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: 28px; font-weight: 500;
+}
+.service-panel--pro .service-panel-tag {
+  background: rgba(77,142,255,0.15);
+  border: 1px solid rgba(77,142,255,0.3);
+  color: var(--pro-light);
+}
+.service-panel--rom .service-panel-tag {
+  background: rgba(232,96,122,0.15);
+  border: 1px solid rgba(232,96,122,0.3);
+  color: var(--rom-blush);
+}
+.service-panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 400; line-height: 1.1;
+  margin-bottom: 36px;
+}
+.service-items { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+.service-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px; border-radius: var(--r-md);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease-spring);
+}
+.service-item:hover {
+  transform: translateX(6px);
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+}
+.service-item-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 10px;
+  display: grid; place-items: center; font-size: 1.1rem;
+}
+.service-panel--pro .service-item-icon {
+  background: rgba(77,142,255,0.2);
+}
+.service-panel--rom .service-item-icon {
+  background: rgba(232,96,122,0.2);
+}
+.service-item-text { flex: 1; }
+.service-item-name {
+  font-weight: 500; font-size: 0.95rem; margin-bottom: 4px;
+}
+.service-item-desc {
+  font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════
+   PORTFOLIO SNIPPETS
+══════════════════════════════════════════ */
+#portfolio {
+  position: relative; z-index: 2;
+  padding: 120px 48px;
+  overflow: hidden;
+}
+.portfolio-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(27,79,216,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.portfolio-inner { max-width: 1200px; margin: 0 auto; }
+.portfolio-header {
+  text-align: center; margin-bottom: 72px;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.portfolio-header.visible { opacity: 1; transform: none; }
+.portfolio-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.mockup-card {
+  position: relative; border-radius: var(--r-lg); overflow: hidden;
+  cursor: none;
+  opacity: 0; transform: translateY(50px) scale(0.96);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.mockup-card.visible { opacity: 1; transform: none; }
+.mockup-card:hover { transform: translateY(-8px) scale(1.015) !important; }
+.mockup-card:hover .mockup-overlay { opacity: 1; }
+.mockup-card:hover .mockup-browser { transform: scale(1.04); }
+.mockup-browser {
+  background: #111218;
+  transition: transform 0.5s var(--ease-out);
+  height: 280px; overflow: hidden;
+}
+.browser-bar {
+  background: #1E1F2A;
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.browser-dots { display: flex; gap: 5px; }
+.browser-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+}
+.browser-dot:nth-child(1) { background: #FF5F57; }
+.browser-dot:nth-child(2) { background: #FEBC2E; }
+.browser-dot:nth-child(3) { background: #28C840; }
+.browser-url {
+  flex: 1; background: rgba(255,255,255,0.06);
+  border-radius: 4px; padding: 4px 10px;
+  font-size: 0.65rem; color: rgba(255,255,255,0.3);
+  font-family: monospace;
+}
+.browser-content {
+  height: calc(280px - 41px); overflow: hidden; position: relative;
+}
+
+/* === MOCKUP 1: CORPORATE === */
+.mock-corporate {
+  background: linear-gradient(145deg, #0A0E2A 0%, #111532 100%);
+  height: 100%; padding: 0;
+}
+.mock-corp-hero {
+  height: 110px; padding: 20px;
+  background: linear-gradient(135deg, #0D1B5E 0%, #1B3A8A 100%);
+  display: flex; align-items: flex-end;
+}
+.mock-corp-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; color: #fff; font-weight: 600;
+}
+.mock-corp-nav {
+  display: flex; gap: 8px; padding: 10px 20px;
+}
+.mock-nav-item {
+  height: 4px; border-radius: 2px; background: rgba(255,255,255,0.15);
+}
+.mock-corp-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 6px; padding: 0 20px;
+}
+.mock-corp-card {
+  height: 40px; border-radius: 4px;
+  background: rgba(77,142,255,0.2);
+}
+.mock-corp-bar {
+  height: 6px; margin: 10px 20px; border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+}
+.mock-corp-bar-short {
+  height: 6px; margin: 6px 20px; width: 60%; border-radius: 3px;
+  background: rgba(255,255,255,0.06);
+}
+
+/* === MOCKUP 2: RESTAURANT === */
+.mock-restaurant {
+  background: #1A0E08; height: 100%;
+}
+.mock-rest-hero {
+  height: 100px; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #4A1505 0%, #8B3A0A 100%);
+  display: flex; align-items: center; padding: 0 16px;
+}
+.mock-rest-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; color: #F5C84A; letter-spacing: 0.1em;
+}
+.mock-rest-circle {
+  position: absolute; right: -20px; top: -20px;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(245,200,74,0.12);
+}
+.mock-rest-menu {
+  padding: 8px 16px; display: flex; gap: 8px; flex-wrap: wrap;
+}
+.mock-rest-tag {
+  padding: 3px 8px; border-radius: 100px;
+  background: rgba(245,200,74,0.2);
+  font-size: 0.5rem; color: #F5C84A;
+}
+.mock-rest-dishes {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 0 16px;
+}
+.mock-dish {
+  height: 44px; border-radius: 6px;
+  background: linear-gradient(135deg, #2A1208 0%, #3D1C0E 100%);
+  border: 1px solid rgba(245,200,74,0.1);
+}
+
+/* === MOCKUP 3: PORTFOLIO (CREATIVE) === */
+.mock-portfolio {
+  background: #F5F5F0; height: 100%;
+}
+.mock-port-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+}
+.mock-port-logo {
+  width: 30px; height: 8px; background: #111; border-radius: 2px;
+}
+.mock-port-links { display: flex; gap: 6px; }
+.mock-port-link {
+  width: 20px; height: 4px; background: #bbb; border-radius: 2px;
+}
+.mock-port-hero {
+  padding: 16px; position: relative;
+}
+.mock-port-big-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; color: #111; line-height: 1;
+  font-weight: 600;
+}
+.mock-port-grid {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 6px; padding: 0 16px;
+}
+.mock-port-img {
+  height: 60px; border-radius: 6px;
+  background: linear-gradient(135deg, #1B4FD8 0%, #7B2FBE 100%);
+}
+.mock-port-img2 {
+  height: 60px; border-radius: 6px;
+  background: linear-gradient(135deg, #F5A623 0%, #F55823 100%);
+}
+
+/* === MOCKUP 4: WEDDING === */
+.mock-wedding {
+  background: #FBF7F3; height: 100%;
+}
+.mock-wed-hero {
+  height: 110px; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #F2E8E0 0%, #E8D5C8 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.mock-wed-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; color: #5D3A2E; letter-spacing: 0.12em; text-align: center;
+}
+.mock-wed-date {
+  font-size: 0.55rem; color: #8B6B5A; letter-spacing: 0.2em; margin-top: 4px;
+}
+.mock-wed-divider {
+  height: 1px; background: rgba(139,107,90,0.3);
+  margin: 8px 16px;
+}
+.mock-wed-rsvp {
+  display: flex; justify-content: center; padding: 6px;
+}
+.mock-wed-btn {
+  padding: 5px 16px; border-radius: 100px;
+  background: #8B6B5A; color: #fff;
+  font-size: 0.55rem; letter-spacing: 0.12em;
+}
+.mock-wed-flowers {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 0 16px;
+}
+.mock-wed-flower {
+  height: 30px; border-radius: 4px;
+  background: linear-gradient(135deg, rgba(232,213,200,0.6), rgba(242,232,224,0.4));
+  border: 1px solid rgba(139,107,90,0.1);
+}
+
+/* === MOCKUP 5: LOVE STORY === */
+.mock-lovestory {
+  background: linear-gradient(145deg, #1A0512 0%, #2D0D1F 100%); height: 100%;
+}
+.mock-love-hero {
+  height: 90px; position: relative;
+  background: linear-gradient(135deg, #4A0A2A 0%, #8B1A4A 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.mock-love-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; color: #F5C84A; letter-spacing: 0.08em; text-align: center;
+}
+.mock-love-hearts { font-size: 0.8rem; margin-top: 4px; }
+.mock-love-timeline {
+  padding: 10px 16px; display: flex; flex-direction: column; gap: 8px;
+}
+.mock-love-entry {
+  display: flex; align-items: center; gap: 8px;
+}
+.mock-love-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--rom-blush);
+}
+.mock-love-text {
+  flex: 1; height: 8px; border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+}
+.mock-love-date {
+  width: 28px; height: 8px; border-radius: 4px;
+  background: rgba(245,200,74,0.3);
+}
+
+/* === MOCKUP 6: E-COMMERCE === */
+.mock-ecom {
+  background: #FAFAFA; height: 100%;
+}
+.mock-ecom-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 14px; border-bottom: 1px solid #E5E5E5;
+}
+.mock-ecom-logo { width: 36px; height: 6px; background: #222; border-radius: 2px; }
+.mock-ecom-icons { display: flex; gap: 5px; }
+.mock-ecom-icon { width: 12px; height: 12px; border-radius: 50%; background: #ccc; }
+.mock-ecom-banner {
+  background: #111; padding: 14px 14px 10px;
+}
+.mock-ecom-banner-text {
+  font-size: 0.7rem; color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+}
+.mock-ecom-products {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
+  padding: 8px 14px;
+}
+.mock-ecom-product {
+  border-radius: 6px; overflow: hidden;
+  border: 1px solid #E5E5E5;
+}
+.mock-ecom-product-img {
+  height: 38px;
+  background: linear-gradient(135deg, #E8E8E8 0%, #F5F5F5 100%);
+}
+.mock-ecom-product-info { padding: 4px; }
+.mock-ecom-price {
+  height: 4px; border-radius: 2px; background: #1B4FD8; width: 60%;
+}
+
+/* Mockup overlay */
+.mockup-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(6,12,31,0.95) 0%, rgba(6,12,31,0.4) 60%, transparent 100%);
+  display: flex; align-items: flex-end; padding: 24px;
+  opacity: 0; transition: opacity 0.4s;
+}
+.mockup-info { }
+.mockup-type {
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-bottom: 6px;
+}
+.mockup-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 400;
+  margin-bottom: 12px;
+}
+.mockup-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.75rem; color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 7px 16px; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: background 0.3s, border-color 0.3s;
+}
+.mockup-link:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+
+/* ══════════════════════════════════════════
+   PROCESS SECTION
+══════════════════════════════════════════ */
+#process {
+  position: relative; z-index: 2;
+  padding: 120px 48px;
+  max-width: 1100px; margin: 0 auto;
+}
+.process-header {
+  text-align: center; margin-bottom: 80px;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.process-header.visible { opacity: 1; transform: none; }
+.process-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  position: relative;
+}
+.process-steps::before {
+  content: ''; position: absolute;
+  top: 28px; left: calc(12.5%); right: calc(12.5%); height: 1px;
+  background: linear-gradient(90deg, var(--pro-blue), var(--rom-blush));
+  opacity: 0.3;
+}
+.process-step {
+  text-align: center; padding: 24px 16px;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.process-step.visible { opacity: 1; transform: none; }
+.process-step:nth-child(1) { transition-delay: 0.1s; }
+.process-step:nth-child(2) { transition-delay: 0.22s; }
+.process-step:nth-child(3) { transition-delay: 0.34s; }
+.process-step:nth-child(4) { transition-delay: 0.46s; }
+.step-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; margin: 0 auto 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 300;
+  position: relative; z-index: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.step-num::before {
+  content: ''; position: absolute; inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pro-blue), var(--rom-blush));
+  opacity: 0; z-index: -1;
+  transition: opacity 0.3s;
+}
+.process-step:hover .step-num::before { opacity: 0.15; }
+.step-title {
+  font-size: 0.9rem; font-weight: 500; margin-bottom: 10px;
+}
+.step-desc {
+  font-size: 0.78rem; color: rgba(255,255,255,0.45); line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════ */
+#testimonials {
+  position: relative; z-index: 2;
+  padding: 120px 48px;
+  overflow: hidden;
+}
+.testi-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 20% 50%, rgba(139,26,74,0.07) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 50% at 80% 50%, rgba(27,79,216,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+.testi-inner { max-width: 1100px; margin: 0 auto; }
+.testi-header {
+  text-align: center; margin-bottom: 72px;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.testi-header.visible { opacity: 1; transform: none; }
+.testi-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.testi-card {
+  padding: 36px 28px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-lg);
+  position: relative;
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out),
+              background 0.3s, border-color 0.3s;
+}
+.testi-card.visible { opacity: 1; transform: none; }
+.testi-card:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.14);
+}
+.testi-card:nth-child(1) { transition-delay: 0.1s; }
+.testi-card:nth-child(2) { transition-delay: 0.22s; }
+.testi-card:nth-child(3) { transition-delay: 0.34s; }
+.testi-quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem; line-height: 0.8; color: rgba(255,255,255,0.12);
+  margin-bottom: 16px; display: block;
+}
+.testi-text {
+  font-size: 0.88rem; line-height: 1.75;
+  color: rgba(255,255,255,0.7); margin-bottom: 28px;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+}
+.testi-author {
+  display: flex; align-items: center; gap: 12px;
+}
+.testi-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.testi-name { font-size: 0.85rem; font-weight: 500; margin-bottom: 2px; }
+.testi-role { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+.testi-stars {
+  position: absolute; top: 28px; right: 28px;
+  color: var(--rom-gold); font-size: 0.7rem; letter-spacing: 2px;
+}
+
+/* ══════════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════════ */
+#cta {
+  position: relative; z-index: 2;
+  padding: 120px 48px;
+  text-align: center;
+  overflow: hidden;
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(13,31,74,0.6) 0%, rgba(26,5,18,0.6) 100%);
+  pointer-events: none;
+}
+.cta-glow-left {
+  position: absolute; left: -200px; top: 50%; transform: translateY(-50%);
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, var(--pro-blue) 0%, transparent 70%);
+  opacity: 0.12; pointer-events: none;
+  animation: floatSlow 8s ease-in-out infinite;
+}
+.cta-glow-right {
+  position: absolute; right: -200px; top: 50%; transform: translateY(-50%);
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, var(--rom-rose) 0%, transparent 70%);
+  opacity: 0.12; pointer-events: none;
+  animation: floatSlow 8s ease-in-out infinite reverse;
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-55%) scale(1.1); }
+}
+.cta-inner {
+  position: relative; z-index: 1; max-width: 680px; margin: 0 auto;
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.cta-inner.visible { opacity: 1; transform: none; }
+.cta-eyebrow {
+  display: inline-block;
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 24px;
+}
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 300; line-height: 1.05;
+  margin-bottom: 24px;
+}
+.cta-title em {
+  font-style: italic;
+  background: linear-gradient(90deg, var(--pro-light), var(--rom-blush));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cta-subtitle {
+  font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.7;
+  margin-bottom: 48px;
+}
+.cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 36px; border-radius: 100px;
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+  border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8);
+  background: transparent; text-decoration: none; cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.5); color: #fff;
+  background: rgba(255,255,255,0.06);
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  position: relative; z-index: 2;
+  padding: 60px 48px 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+}
+.footer-brand {}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; color: #fff; font-weight: 600;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+  text-decoration: none;
+}
+.footer-tagline {
+  font-size: 0.82rem; color: rgba(255,255,255,0.4);
+  line-height: 1.6; max-width: 280px; margin-bottom: 24px;
+}
+.footer-social { display: flex; gap: 10px; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem;
+  transition: background 0.3s, color 0.3s;
+}
+.social-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.footer-col-title {
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 20px; font-weight: 500;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a {
+  font-size: 0.85rem; color: rgba(255,255,255,0.55); text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: #fff; }
+.footer-bottom {
+  max-width: 1100px; margin: 40px auto 0;
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy {
+  font-size: 0.75rem; color: rgba(255,255,255,0.28);
+}
+.footer-contact {
+  font-size: 0.78rem; color: rgba(255,255,255,0.4);
+  display: flex; align-items: center; gap: 20px;
+}
+.footer-contact a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.3s; }
+.footer-contact a:hover { color: #fff; }
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  #hero { padding: 100px 24px 80px; }
+  #stats { padding: 32px 24px; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  #services { padding: 80px 24px; }
+  .services-grid { grid-template-columns: 1fr; gap: 2px; }
+  .service-panel--pro { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .service-panel { padding: 48px 32px; }
+  #portfolio { padding: 80px 24px; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  #process { padding: 80px 24px; }
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
+  .process-steps::before { display: none; }
+  #testimonials { padding: 80px 24px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  #cta { padding: 80px 24px; }
+  footer { padding: 48px 24px 32px; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+@media (max-width: 560px) {
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+
+<canvas id="hero-canvas"></canvas>
+
+<!-- ══════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">✦</div>
+    Igugu Technologies
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="#cta" class="nav-cta">Get Started</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-split">
+    <div class="hero-split-pro"></div>
+    <div class="hero-split-rom"></div>
+  </div>
+  <div class="hero-divider"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Professional Design · Personal Touch
+    </div>
+
+    <h1 class="hero-title">
+      Elevate Your<br>
+      <em>Online Presence</em>
+      <span class="hero-title-line2">with Heart &amp; Precision</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      We craft extraordinary websites for ambitious businesses and
+      unforgettable romantic milestones, from boardrooms to bridal suites.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#services" class="btn-primary">
+        <span>Explore Services</span>
+        <span>→</span>
+      </a>
+      <a href="#portfolio" class="btn-secondary">
+        View Our Work ↓
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     STATS
+══════════════════════════════════════════ -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number" data-target="8">0</div>
+      <div class="stat-label">Websites Launched</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="98">0</div>
+      <div class="stat-label">Client Satisfaction %</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="7">0</div>
+      <div class="stat-label">Days Average Delivery</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="24">0</div>
+      <div class="stat-label">Hour Support</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════ -->
+<section id="services">
+  <div class="services-header">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-heading">Two worlds.<br><em>One studio.</em></h2>
+  </div>
+
+  <div class="services-grid">
+    <!-- PROFESSIONAL -->
+    <div class="service-panel service-panel--pro">
+      <div class="service-panel-tag">💼 Professional</div>
+      <h3 class="service-panel-title">Professional<br>Web Solutions</h3>
+      <ul class="service-items">
+        <li class="service-item">
+          <div class="service-item-icon">🏢</div>
+          <div class="service-item-text">
+            <div class="service-item-name">Company Portfolios</div>
+            <div class="service-item-desc">Elegant showcase sites that tell your brand story and convert visitors into clients.</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-item-icon">🖥️</div>
+          <div class="service-item-text">
+            <div class="service-item-name">Business &amp; SME Websites</div>
+            <div class="service-item-desc">Full-featured sites built for growth, from local shops to regional enterprises.</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-item-icon">📈</div>
+          <div class="service-item-text">
+            <div class="service-item-name">Web Development &amp; SEO</div>
+            <div class="service-item-desc">Technically excellent builds paired with search strategies that bring organic traffic.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ROMANTIC -->
+    <div class="service-panel service-panel--rom">
+      <div class="service-panel-tag">💖 Romantic</div>
+      <h3 class="service-panel-title">Romantic<br>Web Experiences</h3>
+      <ul class="service-items">
+        <li class="service-item">
+          <div class="service-item-icon">💒</div>
+          <div class="service-item-text">
+            <div class="service-item-name">Mini Wedding Websites + RSVP</div>
+            <div class="service-item-desc">Beautiful wedding pages with live RSVP, itinerary, and gallery your guests will adore.</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-item-icon">💕</div>
+          <div class="service-item-text">
+            <div class="service-item-name">Love Story Sites for Couples</div>
+            <div class="service-item-desc">Interactive timelines that narrate your journey from "How We Met" to forever.</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-item-icon">🌹</div>
+          <div class="service-item-text">
+            <div class="service-item-name">Interactive Anniversary Pages</div>
+            <div class="service-item-desc">Surprise your partner with a stunning digital love letter they'll always remember.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PORTFOLIO MOCKUPS
+══════════════════════════════════════════ -->
+<section id="portfolio">
+  <div class="portfolio-bg"></div>
+  <div class="portfolio-inner">
+    <div class="portfolio-header">
+      <div class="section-label">Our Work</div>
+      <h2 class="section-heading">Every site, a <em>masterpiece.</em></h2>
+      <p style="color:rgba(255,255,255,0.45);font-size:0.95rem;max-width:480px;margin:0 auto;line-height:1.7;">
+        A glimpse at the types of websites we create ,hover to explore each world.
+      </p>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <!-- Card 1: Corporate -->
+      <div class="mockup-card" style="transition-delay:0.05s">
+        <div class="mockup-browser">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+            </div>
+            <div class="browser-url">www.acmecorp.co.zw</div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-corporate">
+              <div class="mock-corp-hero"><div class="mock-corp-title">ACME Corporation</div></div>
+              <div class="mock-corp-nav">
+                <div class="mock-nav-item" style="width:30px"></div>
+                <div class="mock-nav-item" style="width:24px"></div>
+                <div class="mock-nav-item" style="width:36px"></div>
+                <div class="mock-nav-item" style="width:20px"></div>
+              </div>
+              <div class="mock-corp-cards">
+                <div class="mock-corp-card"></div>
+                <div class="mock-corp-card" style="background:rgba(62,207,255,0.2)"></div>
+                <div class="mock-corp-card" style="background:rgba(77,142,255,0.15)"></div>
+              </div>
+              <div class="mock-corp-bar"></div><div class="mock-corp-bar-short"></div>
+              <div class="mock-corp-bar" style="width:80%;margin-left:20px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-overlay">
+          <div class="mockup-info">
+            <div class="mockup-type">Corporate · Professional</div>
+            <div class="mockup-name">Company Portfolio</div>
+            <a href="#cta" class="mockup-link">Build Mine →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Restaurant -->
+      <div class="mockup-card" style="transition-delay:0.12s">
+        <div class="mockup-browser">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+            </div>
+            <div class="browser-url">harvestbistro.com</div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-restaurant">
+              <div class="mock-rest-hero">
+                <div class="mock-rest-circle"></div>
+                <div class="mock-rest-title">HARVEST BISTRO</div>
+              </div>
+              <div class="mock-rest-menu">
+                <div class="mock-rest-tag">Starters</div>
+                <div class="mock-rest-tag">Mains</div>
+                <div class="mock-rest-tag">Desserts</div>
+                <div class="mock-rest-tag">Reserve</div>
+              </div>
+              <div class="mock-rest-dishes">
+                <div class="mock-dish"></div>
+                <div class="mock-dish"></div>
+                <div class="mock-dish" style="background:linear-gradient(135deg,#1A0A04,#2D1208)"></div>
+                <div class="mock-dish" style="background:linear-gradient(135deg,#251208,#3D2010)"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-overlay">
+          <div class="mockup-info">
+            <div class="mockup-type">SME · Hospitality</div>
+            <div class="mockup-name">Restaurant Website</div>
+            <a href="#cta" class="mockup-link">Build Mine →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Creative Portfolio -->
+      <div class="mockup-card" style="transition-delay:0.19s">
+        <div class="mockup-browser">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+            </div>
+            <div class="browser-url">janestudio.design</div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-portfolio">
+              <div class="mock-port-nav">
+                <div class="mock-port-logo"></div>
+                <div class="mock-port-links">
+                  <div class="mock-port-link"></div><div class="mock-port-link"></div><div class="mock-port-link"></div>
+                </div>
+              </div>
+              <div class="mock-port-hero">
+                <div class="mock-port-big-text">Creative<br>Portfolio</div>
+              </div>
+              <div class="mock-port-grid">
+                <div class="mock-port-img"></div>
+                <div class="mock-port-img2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-overlay">
+          <div class="mockup-info">
+            <div class="mockup-type">Creative · Portfolio</div>
+            <div class="mockup-name">Designer Showcase</div>
+            <a href="#cta" class="mockup-link">Build Mine →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Wedding -->
+      <div class="mockup-card" style="transition-delay:0.26s">
+        <div class="mockup-browser">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+            </div>
+            <div class="browser-url">tendai-and-rudo.com</div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-wedding">
+              <div class="mock-wed-hero">
+                <div class="mock-wed-title">Tendai &amp; Rudo</div>
+                <div class="mock-wed-date">MARCH 14, 2026 · HARARE</div>
+              </div>
+              <div class="mock-wed-divider"></div>
+              <div class="mock-wed-rsvp">
+                <div class="mock-wed-btn">RSVP NOW</div>
+              </div>
+              <div class="mock-wed-flowers">
+                <div class="mock-wed-flower"></div>
+                <div class="mock-wed-flower" style="background:linear-gradient(135deg,rgba(232,180,160,0.5),rgba(242,210,200,0.3))"></div>
+                <div class="mock-wed-flower"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-overlay">
+          <div class="mockup-info">
+            <div class="mockup-type">Romantic · Wedding</div>
+            <div class="mockup-name">Wedding + RSVP Site</div>
+            <a href="#cta" class="mockup-link">Build Mine →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Love Story -->
+      <div class="mockup-card" style="transition-delay:0.33s">
+        <div class="mockup-browser">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+            </div>
+            <div class="browser-url">ourstory.love</div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-lovestory">
+              <div class="mock-love-hero">
+                <div class="mock-love-title">Our Love Story</div>
+                <div class="mock-love-hearts">♥ ♥ ♥</div>
+              </div>
+              <div class="mock-love-timeline">
+                <div class="mock-love-entry">
+                  <div class="mock-love-dot"></div>
+                  <div class="mock-love-text"></div>
+                  <div class="mock-love-date"></div>
+                </div>
+                <div class="mock-love-entry">
+                  <div class="mock-love-dot" style="background:var(--rom-gold)"></div>
+                  <div class="mock-love-text" style="width:70%"></div>
+                  <div class="mock-love-date"></div>
+                </div>
+                <div class="mock-love-entry">
+                  <div class="mock-love-dot" style="background:var(--pro-light)"></div>
+                  <div class="mock-love-text" style="width:85%"></div>
+                  <div class="mock-love-date"></div>
+                </div>
+                <div class="mock-love-entry">
+                  <div class="mock-love-dot"></div>
+                  <div class="mock-love-text" style="width:60%"></div>
+                  <div class="mock-love-date"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-overlay">
+          <div class="mockup-info">
+            <div class="mockup-type">Romantic · Couples</div>
+            <div class="mockup-name">Love Story Site</div>
+            <a href="#cta" class="mockup-link">Build Mine →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: E-commerce -->
+      <div class="mockup-card" style="transition-delay:0.4s">
+        <div class="mockup-browser">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+            </div>
+            <div class="browser-url">shopzimba.co.zw</div>
+          </div>
+          <div class="browser-content">
+            <div class="mock-ecom">
+              <div class="mock-ecom-nav">
+                <div class="mock-ecom-logo"></div>
+                <div class="mock-ecom-icons">
+                  <div class="mock-ecom-icon"></div>
+                  <div class="mock-ecom-icon"></div>
+                  <div class="mock-ecom-icon"></div>
+                </div>
+              </div>
+              <div class="mock-ecom-banner">
+                <div class="mock-ecom-banner-text">New Collection — Shop Now</div>
+              </div>
+              <div class="mock-ecom-products">
+                <div class="mock-ecom-product">
+                  <div class="mock-ecom-product-img"></div>
+                  <div class="mock-ecom-product-info"><div class="mock-ecom-price"></div></div>
+                </div>
+                <div class="mock-ecom-product">
+                  <div class="mock-ecom-product-img" style="background:linear-gradient(135deg,#E0E0E0,#F0F0F0)"></div>
+                  <div class="mock-ecom-product-info"><div class="mock-ecom-price" style="background:#E8607A"></div></div>
+                </div>
+                <div class="mock-ecom-product">
+                  <div class="mock-ecom-product-img" style="background:linear-gradient(135deg,#D5E8D4,#EAF5E9)"></div>
+                  <div class="mock-ecom-product-info"><div class="mock-ecom-price" style="background:#2D7A3A"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-overlay">
+          <div class="mockup-info">
+            <div class="mockup-type">SME · E-Commerce</div>
+            <div class="mockup-name">Online Shop</div>
+            <a href="#cta" class="mockup-link">Build Mine →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PROCESS
+══════════════════════════════════════════ -->
+<section id="process">
+  <div class="process-header">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-heading">From idea to <em>live</em><br>in days, not months.</h2>
+  </div>
+
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery Call</div>
+      <div class="step-desc">We learn your vision, goals, and audience to define the perfect web strategy for you.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Design &amp; Concept</div>
+      <div class="step-desc">Our designers craft a bespoke visual identity tailored to your brand personality.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Build &amp; Refine</div>
+      <div class="step-desc">We develop your site with precision, iterating with your feedback until it's perfect.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Launch &amp; Support</div>
+      <div class="step-desc">Your site goes live, and we stay by your side with ongoing support and updates.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="testi-bg"></div>
+  <div class="testi-inner">
+    <div class="testi-header">
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-heading">Real people,<br><em>real results.</em></h2>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">They built our company site in just 10 days. It looks stunning, loads fast, and our clients keep complimenting it. Best investment we've made.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(77,142,255,0.2)">💼</div>
+          <div>
+            <div class="testi-name">Farai Moyo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">Our wedding website had guests raving. The RSVP system worked perfectly and it felt like something out of a magazine. We're forever grateful.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(232,96,122,0.2)">💕</div>
+          <div>
+            <div class="testi-name">Rudo &amp; Chidi Dlamini</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">The SEO work doubled our website traffic in two months. The site itself is beautiful and converts visitors like never before. Professional and personal, just as promised.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(245,200,74,0.2)">🌿</div>
+          <div>
+            <div class="testi-name">Tendai Ncube</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CTA
+══════════════════════════════════════════ -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-glow-left"></div>
+  <div class="cta-glow-right"></div>
+
+  <div class="cta-inner">
+    <span class="cta-eyebrow">Ready when you are</span>
+    <h2 class="cta-title">Let's build something<br><em>extraordinary.</em></h2>
+    <p class="cta-subtitle">
+      Whether you're growing a business or celebrating love —
+      your story deserves a stunning home on the web.
+    </p>
+    <div class="cta-buttons">
+      <a href="mailto:igugutechnologies@outlook.com" class="btn-primary">
+        <span>Start Your Project</span>
+        <span>✦</span>
+      </a>
+      <a href="tel:+263773776287" class="btn-ghost">
+        📞 Call: +263 773 776 287
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">
+        <div class="nav-logo-icon">✦</div>
+        Igugu Technologies
+      </a>
+      <p class="footer-tagline">
+        Creative websites for ambitious businesses and unforgettable romantic milestones. Professional design. Personal touch.
+      </p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">ig</a>
+        <a href="#" class="social-btn">fb</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Company Portfolios</a></li>
+        <li><a href="#">Business Websites</a></li>
+        <li><a href="#">SEO Services</a></li>
+        <li><a href="#">Wedding Sites</a></li>
+        <li><a href="#">Love Story Pages</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#cta">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Get In Touch</div>
+      <ul class="footer-links">
+        <li><a href="mailto:igugutechnologies@outlook.com">igugutechnologies@outlook.com</a></li>
+        <li><a href="tel:+263773776287">+263 773 776 287</a></li>
+        <li><a href="#"><igugutechnologies class="co zw"></igugutechnologies></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Igugu Technologies. All rights reserved.</span>
+    <div class="footer-contact">
+      <a href="mailto:igugutechnologies@outlook.com">igugutechnologies@outlook.com</a>
+      <span>·</span>
+      <a href="tel:+263773776287">+263 773 776 287</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+/* ──────────────────────────────────
+   CANVAS PARTICLE SYSTEM
+────────────────────────────────── */
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+
+document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+function resizeCanvas() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x  = Math.random() * W;
+    this.y  = Math.random() * H;
+    this.r  = Math.random() * 1.8 + 0.4;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.alpha = Math.random() * 0.5 + 0.1;
+    // Color: mix between blue and rose
+    const t = Math.random();
+    this.h = t < 0.5
+      ? `rgba(${Math.round(77 + t*2*100)}, ${Math.round(142 - t*2*60)}, 255`
+      : `rgba(232, ${Math.round(96 + (t-0.5)*2*60)}, ${Math.round(122 + (t-0.5)*2*40)}`;
+  }
+  update() {
+    this.x += this.vx + (mouseX - W/2) * 0.00008;
+    this.y += this.vy + (mouseY - H/2) * 0.00008;
+    if (this.x < -10 || this.x > W+10 || this.y < -10 || this.y > H+10) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+    ctx.fillStyle = `${this.h}, ${this.alpha})`;
+    ctx.fill();
+  }
+}
+
+// Create 160 particles
+for (let i = 0; i < 160; i++) particles.push(new Particle());
+
+// Draw connecting lines
+function drawLines() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i+1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d  = Math.sqrt(dx*dx + dy*dy);
+      if (d < 90) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(255,255,255,${(1 - d/90) * 0.04})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  drawLines();
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+/* ──────────────────────────────────
+   SCROLL NAV
+────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ──────────────────────────────────
+   INTERSECTION OBSERVER (animate-in)
+────────────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Stagger children if it's a grid
+      if (e.target.classList.contains('mockup-card') ||
+          e.target.classList.contains('process-step') ||
+          e.target.classList.contains('testi-card') ||
+          e.target.classList.contains('stat-item') ||
+          e.target.classList.contains('service-panel')) {
+        // already handled by delay in CSS
+      }
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll(
+  '.services-header, .service-panel, .portfolio-header, .mockup-card, ' +
+  '.process-header, .process-step, .testi-header, .testi-card, ' +
+  '.cta-inner, .stat-item'
+).forEach(el => observer.observe(el));
+
+/* ──────────────────────────────────
+   COUNTER ANIMATION
+────────────────────────────────── */
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.target.includes('+') ? '+' : '';
+      let current = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current) + suffix;
+        if (current >= target) clearInterval(timer);
+      }, 20);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number').forEach(el => counterObserver.observe(el));
+
+/* ──────────────────────────────────
+   MOCKUP CARD TILT EFFECT
+────────────────────────────────── */
+document.querySelectorAll('.mockup-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top  + rect.height / 2;
+    const rx = (e.clientY - cy) / (rect.height / 2) * -8;
+    const ry = (e.clientX - cx) / (rect.width  / 2) *  8;
+    card.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-8px) scale(1.015)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+/* ──────────────────────────────────
+   SMOOTH ANCHOR SCROLL
+────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+/* ──────────────────────────────────
+   HERO PARALLAX ON SCROLL
+────────────────────────────────── */
+window.addEventListener('scroll', () => {
+  const heroContent = document.querySelector('.hero-content');
+  if (heroContent && window.scrollY < window.innerHeight) {
+    heroContent.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+    heroContent.style.opacity   = 1 - (window.scrollY / (window.innerHeight * 0.7));
+  }
+});
+</script>
+</body>
+</html>
